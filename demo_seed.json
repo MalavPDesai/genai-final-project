@@ -1,0 +1,176 @@
+{
+  "customers": [
+    {
+      "customer_id": "C1001",
+      "full_name": "Jessica Turner",
+      "email": "jessica.turner@example.com",
+      "phone": "415-555-0101",
+      "city": "San Francisco",
+      "state": "CA"
+    },
+    {
+      "customer_id": "C1002",
+      "full_name": "Marcus Lee",
+      "email": "marcus.lee@example.com",
+      "phone": "510-555-0102",
+      "city": "Oakland",
+      "state": "CA"
+    },
+    {
+      "customer_id": "C1003",
+      "full_name": "Aisha Patel",
+      "email": "aisha.patel@example.com",
+      "phone": "408-555-0103",
+      "city": "San Jose",
+      "state": "CA"
+    },
+    {
+      "customer_id": "C1004",
+      "full_name": "John Smith",
+      "email": "john.smith1@example.com",
+      "phone": "650-555-0104",
+      "city": "Palo Alto",
+      "state": "CA"
+    },
+    {
+      "customer_id": "C1005",
+      "full_name": "John Smith",
+      "email": "john.smith2@example.com",
+      "phone": "925-555-0105",
+      "city": "Walnut Creek",
+      "state": "CA"
+    }
+  ],
+  "reservations": [
+    {
+      "reservation_id": "RSV784562",
+      "customer_id": "C1001",
+      "hotel_name": "CoastalView Seattle",
+      "check_in": "2026-11-05",
+      "check_out": "2026-11-08",
+      "room_type": "Deluxe King",
+      "status": "Confirmed",
+      "nightly_rate": 289
+    },
+    {
+      "reservation_id": "RSV784563",
+      "customer_id": "C1002",
+      "hotel_name": "CoastalView San Francisco",
+      "check_in": "2026-10-18",
+      "check_out": "2026-10-21",
+      "room_type": "Standard King",
+      "status": "Confirmed",
+      "nightly_rate": 259
+    },
+    {
+      "reservation_id": "RSV784564",
+      "customer_id": "C1003",
+      "hotel_name": "CoastalView Seattle",
+      "check_in": "2026-12-20",
+      "check_out": "2026-12-24",
+      "room_type": "Deluxe Queen",
+      "status": "Confirmed",
+      "nightly_rate": 309
+    },
+    {
+      "reservation_id": "RSV784565",
+      "customer_id": "C1004",
+      "hotel_name": "CoastalView San Francisco",
+      "check_in": "2026-11-12",
+      "check_out": "2026-11-14",
+      "room_type": "Standard King",
+      "status": "Confirmed",
+      "nightly_rate": 249
+    },
+    {
+      "reservation_id": "RSV784566",
+      "customer_id": "C1005",
+      "hotel_name": "CoastalView Seattle",
+      "check_in": "2026-11-12",
+      "check_out": "2026-11-15",
+      "room_type": "Executive King",
+      "status": "Confirmed",
+      "nightly_rate": 379
+    }
+  ],
+  "loyalty": [
+    {
+      "customer_id": "C1001",
+      "tier": "Gold",
+      "points": 28450
+    },
+    {
+      "customer_id": "C1002",
+      "tier": "Silver",
+      "points": 9100
+    },
+    {
+      "customer_id": "C1003",
+      "tier": "Gold",
+      "points": 33125
+    },
+    {
+      "customer_id": "C1004",
+      "tier": "Member",
+      "points": 2400
+    },
+    {
+      "customer_id": "C1005",
+      "tier": "Platinum",
+      "points": 61200
+    }
+  ],
+  "availability": {
+    "CoastalView Seattle|2026-11-10|2026-11-13|Deluxe King": 0,
+    "CoastalView Seattle|2026-11-10|2026-11-13|Deluxe Queen": 3,
+    "CoastalView Seattle|2026-11-10|2026-11-13|Executive King": 1
+  },
+  "policies": [
+    {
+      "id": "POL-RES-01",
+      "title": "Reservation Modification Policy",
+      "keywords": [
+        "change",
+        "modify",
+        "reservation",
+        "dates",
+        "room"
+      ],
+      "text": "Confirmed reservations may be modified before check-in, subject to room availability. The requested room must be checked for every night. If unavailable, staff may offer alternatives. The assistant must not finalize a change without explicit staff approval."
+    },
+    {
+      "id": "POL-VERIFY-01",
+      "title": "Customer Verification Policy",
+      "keywords": [
+        "identity",
+        "verify",
+        "customer",
+        "duplicate",
+        "name"
+      ],
+      "text": "Before displaying or changing reservation details, the customer must match a unique record. If multiple records match the same name, the assistant must request an additional identifier such as reservation number or email and must not guess."
+    },
+    {
+      "id": "POL-LOY-01",
+      "title": "Gold Loyalty Benefits",
+      "keywords": [
+        "gold",
+        "late checkout",
+        "upgrade",
+        "loyalty"
+      ],
+      "text": "Gold members receive priority support, complimentary room upgrades when available, and late checkout up to 2:00 PM when available."
+    },
+    {
+      "id": "POL-ERR-01",
+      "title": "Error & Escalation Policy",
+      "keywords": [
+        "error",
+        "failed",
+        "system",
+        "escalate"
+      ],
+      "text": "If a tool, database, or API returns an error, the assistant must not claim success. The current record should remain unchanged and the issue should be escalated to a staff user."
+    }
+  ]
+}

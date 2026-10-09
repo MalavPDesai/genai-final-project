@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>CoastalView CRM + GenAI Demo</title>
+<link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="logo">CV</div>
+      <div><strong>CoastalView</strong><span>CRM Demo</span></div>
+    </div>
+    <nav>
+      <button class="nav active" data-view="assistant">AI Assistant</button>
+      <button class="nav" data-view="contacts">Contacts</button>
+      <button class="nav" data-view="reservations">Reservations</button>
+      <button class="nav" data-view="cases">Cases</button>
+      <button class="nav" data-view="policies">Policies / RAG</button>
+      <button class="nav" data-view="metrics">Before vs After</button>
+      <button class="nav" data-view="architecture">Architecture</button>
+    </nav>
+    <div class="synthetic">Synthetic academic demo only</div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div>
+        <h1 id="viewTitle">GenAI Reservation Assistant</h1>
+        <p id="viewSubtitle">SuiteCRM-style concept demonstrating read, reason, retrieve, approve, and write-back.</p>
+      </div>
+      <div class="status-pill"><span class="dot"></span> Demo system online</div>
+    </header>
+
+    <section id="assistant" class="view active">
+      <div class="grid two">
+        <div class="card">
+          <div class="card-title">Staff request</div>
+          <textarea id="promptBox" rows="5">Move Jessica Turner's reservation to Nov 10–13.</textarea>
+          <div class="quick-actions">
+            <button class="chip" data-prompt="Move Jessica Turner's reservation to Nov 10–13.">Normal change</button>
+            <button class="chip" data-prompt="Change John Smith's reservation.">Ambiguous customer</button>
+            <button class="chip" data-prompt="What benefits does Jessica Turner get as a Gold member?">Policy lookup</button>
+          </div>
+          <button id="runBtn" class="primary">Run AI workflow</button>
+        </div>
+        <div class="card">
+          <div class="card-title">Agent activity</div>
+          <div id="toolTimeline" class="timeline empty">Run a request to see tool calls.</div>
+        </div>
+      </div>
+
+      <div class="grid two lower">
+        <div class="card">
+          <div class="card-title">Assistant response</div>
+          <div id="assistantResponse" class="response muted">The agent will summarize retrieved CRM, reservation, loyalty, availability, and policy information here.</div>
+          <div id="approvalArea"></div>
+        </div>
+        <div class="card">
+          <div class="card-title">Live record preview</div>
+          <div id="recordPreview" class="record-preview muted">No record loaded.</div>
+        </div>
+      </div>
+
+      <div class="card lower">
+        <div class="card-title">Audit log / side effects</div>
+        <table>
+          <thead><tr><th>Time</th><th>Action</th><th>Record</th><th>Result</th></tr></thead>
+          <tbody id="auditBody"><tr><td colspan="4" class="muted">No write operations yet.</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="contacts" class="view">
+      <div class="card">
+        <div class="card-title">CRM Contacts</div>
+        <p class="muted">This represents the contact information a staff user would normally search in SuiteCRM.</p>
+        <table id="contactsTable"></table>
+      </div>
+    </section>
+
+    <section id="reservations" class="view">
+      <div class="card">
+        <div class="card-title">Reservation Database</div>
+        <p class="muted">Separate operational reservation data connected to the AI through tools.</p>
+        <table id="reservationsTable"></table>
+      </div>
+    </section>
+
+    <section id="cases" class="view">
+      <div class="card">
+        <div class="card-title">CRM Cases</div>
+        <p class="muted">Write-back actions create or update case records after staff approval.</p>
+        <table>
+          <thead><tr><th>Case ID</th><th>Customer</th><th>Type</th><th>Status</th><th>Resolution</th></tr></thead>
+          <tbody id="casesBody">
+            <tr><td>CASE9001</td><td>Jessica Turner</td><td>Reservation Modification Request</td><td><span class="badge warn">New</span></td><td>Awaiting action</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="policies" class="view">
+      <div class="grid two">
+        <div class="card">
+          <div class="card-title">Policy knowledge base</div>
+          <input id="policySearch" placeholder="Search policy, e.g. Gold late checkout"/>
+          <button id="policyBtn" class="secondary">Retrieve relevant policy</button>
+          <div id="policyResult" class="policy-result muted">Search to demonstrate RAG-style retrieval.</div>
+        </div>
+        <div class="card">
+          <div class="card-title">How the AI uses policies</div>
+          <ol class="steps">
+            <li>User asks a business question.</li>
+            <li>Agent searches the policy knowledge base.</li>
+            <li>Relevant policy text is added to model context.</li>
+            <li>Agent answers using that policy instead of guessing.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section id="metrics" class="view">
+      <div class="card">
+        <div class="card-title">Baseline vs GenAI-assisted process</div>
+        <table>
+          <thead><tr><th>Metric</th><th>Manual workflow</th><th>GenAI prototype</th><th>Target improvement</th></tr></thead>
+          <tbody>
+            <tr><td>Systems manually opened</td><td>3</td><td>1</td><td>67% fewer</td></tr>
+            <tr><td>Manual searches</td><td>3–5</td><td>0–1</td><td>Major reduction</td></tr>
+            <tr><td>Typical handling time</td><td>4–6 min</td><td>~1 min</td><td>~75% faster</td></tr>
+            <tr><td>Policy lookup</td><td>Manual document search</td><td>Retrieved in context</td><td>Faster + consistent</td></tr>
+            <tr><td>Write-back</td><td>Manual entry</td><td>Tool call after approval</td><td>Less repetitive entry</td></tr>
+          </tbody>
+        </table>
+        <div class="note">Replace these target values with your measured results after you run your own test scenarios.</div>
+      </div>
+    </section>
+
+    <section id="architecture" class="view">
+      <div class="card">
+        <div class="card-title">Proposed architecture</div>
+        <div class="architecture">
+          <div class="node primary-node">Staff user</div><div class="arrow">→</div>
+          <div class="node ai-node">GenAI Agent<br><small>prompt + tool calling</small></div><div class="arrow">→</div>
+          <div class="stack">
+            <div class="node">CRM contacts/cases</div>
+            <div class="node">Reservation database</div>
+            <div class="node">Loyalty records</div>
+            <div class="node">Policy RAG</div>
+          </div>
+        </div>
+        <div class="callout">
+          <strong>Important:</strong> this site is a working front-end prototype. The next development step is to replace its browser-side demo functions with real Python/API tool calls to your SQLite database and, if desired, SuiteCRM.
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

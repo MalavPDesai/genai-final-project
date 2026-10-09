@@ -1,0 +1,10 @@
+.env
+.venv/
+venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+.rag_embeddings.json
+*.db-journal
+*.db-wal
+*.db-shm

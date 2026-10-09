@@ -1,0 +1,15 @@
+# CoastalView Hotel Policies
+
+Synthetic academic demo policy source used by the RAG component.
+
+## POL-RES-01 | Reservation Modification Policy
+Confirmed reservations may be modified before check-in, subject to room availability. The requested room must be checked for every night. If unavailable, staff may offer alternatives. The assistant must not finalize a change without explicit staff approval.
+
+## POL-VERIFY-01 | Customer Verification Policy
+Before displaying or changing reservation details, the customer must match a unique record. If multiple records match the same name, the assistant must request an additional identifier such as reservation number or email and must not guess.
+
+## POL-LOY-01 | Gold Loyalty Benefits
+Gold members receive priority support, complimentary room upgrades when available, and late checkout up to 2:00 PM when available.
+
+## POL-ERR-01 | Error & Escalation Policy
+If a tool, database, or API returns an error, the assistant must not claim success. The current record should remain unchanged and the issue should be escalated to a staff user.
