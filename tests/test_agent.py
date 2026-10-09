@@ -1,5 +1,5 @@
 
-from agent import HotelAgent
+from agent import AgentResult, HotelAgent
 
 
 def test_offline_required_scenarios(tools):
@@ -81,3 +81,30 @@ def test_live_mode_ambiguous_customer_is_blocked_before_openai(tools, monkeypatc
     assert result.record_preview is not None
     assert len(result.record_preview["customer_matches"]) == 2
     assert any(item["name"] == "identity_guard" for item in result.tool_calls)
+
+
+def test_live_reservation_change_uses_supported_backend_policy_preflight(tools, monkeypatch):
+    """Operational reservation requests must use supported reservation-policy evidence."""
+    agent = HotelAgent(tools, api_key="test-key", model="test-model", offline_mode=False)
+    captured = {}
+
+    def fake_openai_chat(message, session_id, *, preflight_policy=None):
+        captured["policy"] = preflight_policy
+        return AgentResult(
+            message="preflight ok",
+            evidence_status=preflight_policy.get("evidence_status") if preflight_policy else None,
+            mode="openai",
+        )
+
+    monkeypatch.setattr(agent, "_openai_chat", fake_openai_chat)
+
+    result = agent.chat(
+        "Move Jessica Turner's reservation to Nov 10–13.",
+        "reservation-preflight",
+    )
+
+    assert result.message == "preflight ok"
+    assert captured["policy"] is not None
+    assert captured["policy"]["evidence_status"] == "SUPPORTED"
+    assert captured["policy"]["answer_allowed"] is True
+    assert captured["policy"]["policies"][0]["policy_id"] == "POL-RES-01"

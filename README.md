@@ -241,6 +241,12 @@ Transaction rollback is also covered by automated tests.
 pytest -q
 ```
 
+Expected final result for this repository:
+
+```text
+19 passed
+```
+
 The tests use a temporary copy/test database, not the delivered demo database.
 
 They verify the original database/approval scenarios plus the grounding guard, including:
@@ -283,6 +289,11 @@ coastalview_ai/
         test_database.py
         test_tools.py
         test_rag.py
+        test_agent.py
+
+    docs/
+        ARCHITECTURE_NOTE.md
+        PROMPT_ITERATION_LOG.md
 
     requirements.txt
     .env.example
@@ -414,7 +425,7 @@ No SuiteCRM credentials are invented or required.
 - live SuiteCRM is not required; `SQLiteCRMAdapter` is the current CRM source;
 - staff authentication/RBAC is not implemented in this academic prototype;
 - no real customer data is included;
-- live OpenAI behavior cannot be executed in this environment because no `OPENAI_API_KEY` was supplied, but the production Responses API and embeddings paths are implemented.
+- live OpenAI mode requires each user to create a local `.env` file containing an authorized `OPENAI_API_KEY`; API keys are never committed to the repository.
 
 ### Development fallback
 
